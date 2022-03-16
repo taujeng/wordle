@@ -41,6 +41,8 @@
 }
 
 .box {
+  color: white;
+  background-color: lightslategray;
   display: inline;
   height: 55px;
   width: 55px;
@@ -49,6 +51,14 @@
   border: 1px outset;
   border-radius: 10px;
   font-size: 30px;
+}
+
+.box.correct {
+  background-color: green;
+}
+
+.box.almost {
+  background-color: rgb(175, 175, 4);
 }
 
 .box.one {
@@ -128,6 +138,14 @@
   this removes it; */
   -webkit-tap-highlight-color: transparent;
   position: relative;
+}
+
+.keyboard__key.correct {
+  background-color: green !important;
+}
+
+.keyboard__key.almost {
+  background-color: rgb(175, 175, 4);
 }
 
 .keyboard__key:active {

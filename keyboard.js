@@ -5,6 +5,7 @@ const data = list;
 const chosenWord = data[Math.floor(Math.random()*data.length)].toLowerCase()
 console.log(chosenWord)
 
+let attempt = 1;
 
 
 
@@ -25,7 +26,6 @@ const Keyboard = {
   // contain diff states of the kb
   properties: {
     value: "", // current value of the kb
-    try: 1,
   },
 
   // this is gonna run when page first loads.
@@ -102,6 +102,9 @@ const Keyboard = {
       // putting this in the loop)
       keyElement.classList.add("keyboard__key");
 
+      //  Give ea key its own ID
+      keyElement.setAttribute("id", key)
+
       // Figure out what key we're looping thru
       
       switch (key) {
@@ -128,6 +131,7 @@ const Keyboard = {
           keyElement.addEventListener("click", () => {
             this._checkWord()
             this.properties.value = ""
+            attempt += 1
           })  
 
           break;
@@ -176,8 +180,21 @@ const Keyboard = {
   },
 
   _checkWord() {
-    if (this.properties.value.slice(0,5) === chosenWord) {
+    let currentTry = this.properties.value.slice(0,5)
+    for (let i = 1; i <= currentTry.length; i++) {
+      if (currentTry[i-1] === chosenWord[i-1]) {
+          document.getElementById(`row${attempt}_letter${i}`).classList.add("correct")
+          document.getElementById(currentTry[i-1]).classList.add("correct")
+        } else if (chosenWord.includes(currentTry[i-1])) {
+          document.getElementById(`row${attempt}_letter${i}`).classList.add("almost")
+          document.getElementById(currentTry[i-1]).classList.add("almost")
+        }
+    }
+    if (currentTry === chosenWord) {
       console.log("you win")
+      if (attempt === 1) {
+        console.log("Cheater.")
+      }
     } else {
       console.log("wrong")
     }
@@ -192,7 +209,8 @@ window.addEventListener("DOMContentLoaded", function () {
     console.log("value changed! here it is: " + currentValue);
     if (currentValue.length < 6) {
       for (let i = 1; i <= currentValue.length; i++ ) {
-      document.getElementById(`row1_letter${i}`).innerHTML = currentValue[i-1]; 
+        document.getElementById(`row${attempt}_letter${i}`).innerHTML = currentValue[i-1];
+        console.log(currentValue[i-1], chosenWord[i-1]) 
       }
     }
 
