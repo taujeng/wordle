@@ -1,0 +1,166 @@
+* {
+  margin: 0;
+}
+
+.header {
+  width: 100%;
+  height: 20%;
+}
+
+.headerWrapper {
+  display: flex;
+  align-items: center;
+  margin: 20px 20px 0;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+/* Body CSS */
+
+.bodyContainer {
+  margin: 25px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* width: 450px;
+  height: 550px;
+  display: flex;
+  align-items: center;
+  flex-direction: column; */
+}
+
+.rowContainer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  /* justify-content: space-evenly; */
+}
+
+.box {
+  display: inline;
+  height: 55px;
+  width: 55px;
+  line-height: 50px;
+  margin-right: 2px;
+  border: 1px outset;
+  border-radius: 10px;
+  font-size: 30px;
+}
+
+.box.one {
+  background-color: darkslategrey;
+}
+.two {
+  background-color: purple;
+}
+
+/* Keyboard CSS */
+
+.container {
+  margin: 0;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.use-keyboard-input {
+  height: 200px;
+  width: 500px;
+}
+
+.keyboard {
+  /* floating on everything else. ensure kb remains visible
+  while you scroll down the page */
+  position: fixed;
+  /* place at the bottom */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 5px 0;
+  /* this is the only time you specify the color. 
+  will be using other shades of this color */
+  /* dark green: #004134 */
+  background: #59788e;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  user-select: none;
+  transition: bottom 0.4s;
+}
+
+.keyboard--hidden {
+  bottom: -100%;
+}
+
+.keyboard__keys {
+  text-align: center;
+}
+
+.keyboard__key {
+  height: 45px;
+  /* to keep things responsive */
+  width: 8%;
+  /* for larger screen monitors */
+  max-width: 90px;
+  margin: 3px;
+  border-radius: 4px;
+  border: none;
+  /* still working w the color from .keyboard, making it lighter */
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  /* 1.05 rem = 5% larger than root element size */
+  font-size: 1.05rem;
+  /* remove outlines when mobile user touches */
+  outline: none;
+  cursor: pointer;
+  /* next 3 lines for fully centering the icon within the key */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* align icon keys with letter keys */
+  vertical-align: top;
+  padding: 0;
+  /* on mobile, by default, when you click, it has a blue outline
+  this removes it; */
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+
+.keyboard__key:active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.keyboard__key--wide {
+  width: 12%;
+}
+
+.keyboard__key--extra-wide {
+  width: 36%;
+  max-width: 500px;
+}
+
+/* has the white circle */
+/* after pseudoclass is the virtual element made in css */
+.keyboard__key--activatable::after {
+  content: '';
+  top: 10px;
+  right: 10px;
+  /* need parent to be relative */
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+}
+
+.keyboard__key--active::after {
+  background-color: #08ff00;
+}
+
+.keyboard__key--dark {
+  background: rgba(0, 0, 0, 0.25);
+}
