@@ -19,7 +19,6 @@ popup.addEventListener("click", function() {
 
 
 
-
 const Keyboard = {
   // keep track of classes: keyboard, keyboard__keys, the keys
   elements: {
@@ -191,6 +190,9 @@ const Keyboard = {
         } else if (chosenWord.includes(currentTry[i-1])) {
           document.getElementById(`row${attempt}_letter${i}`).classList.add("almost")
           document.getElementById(currentTry[i-1]).classList.add("almost")
+        } else {
+          document.getElementById(`row${attempt}_letter${i}`).classList.add("wrong")
+          document.getElementById(currentTry[i-1]).classList.add("wrong")
         }
     }
     if (currentTry === chosenWord) {

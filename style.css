@@ -111,11 +111,8 @@
   background-color: rgb(175, 175, 4);
 }
 
-.box.one {
+.box.wrong {
   background-color: darkslategrey;
-}
-.two {
-  background-color: purple;
 }
 
 /* Keyboard CSS */
@@ -196,6 +193,10 @@
 
 .keyboard__key.almost {
   background-color: rgb(175, 175, 4);
+}
+
+.keyboard__key.wrong {
+  background-color: darkslategrey;
 }
 
 .keyboard__key:active {
