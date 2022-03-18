@@ -9,6 +9,17 @@ let attempt = 1;
 
 
 
+let popup = document.getElementById("pop1");
+let popup2 = document.getElementById("the_pop")
+popup.addEventListener("click", function() {
+  popup2.classList.toggle("show");
+})
+
+
+
+
+
+
 const Keyboard = {
   // keep track of classes: keyboard, keyboard__keys, the keys
   elements: {
