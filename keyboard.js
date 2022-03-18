@@ -17,21 +17,16 @@ const Keyboard = {
     keys: [] // arrays of the button for the keys
   },
 
-  // When code says open kb, accept 2 fx (below)
   // fired off when kb gets input, or when kb is closed
   eventHandlers: {
     oninput: null,
   },
 
-  // contain diff states of the kb
   properties: {
     value: "", // current value of the kb
   },
 
-  // this is gonna run when page first loads.
-  // initialize the kb
   init() {
-    // first thing to do is create the keyboard n keyboard__keys elements
 
     // Create main elements
     this.elements.main = document.createElement("div");
@@ -66,9 +61,6 @@ const Keyboard = {
     })
   },
 
-  // private method (the underscore doesn't do anything, just
-  // a naming convention)
-  // create all the html for the keys
   _createKeys() {
     // will return a document fragment (virtual elements, that other elements can 
     // append to. then append the whole fragment to a diff element
@@ -206,10 +198,19 @@ window.addEventListener("DOMContentLoaded", function () {
   Keyboard.init();
   // example of how the system will be using the kb. thru the open method
   Keyboard.open("", function(currentValue) {
+    if (attempt > 6) {
+      console.log("Too many tries.")
+    }
     console.log("value changed! here it is: " + currentValue);
-    if (currentValue.length < 6) {
-      for (let i = 1; i <= currentValue.length; i++ ) {
-        document.getElementById(`row${attempt}_letter${i}`).innerHTML = currentValue[i-1];
+    if (currentValue.length < 6 && attempt < 7) {
+      // Loop runs 5 times no matter what. If I did currentValue.length instead of 5, backspace
+      // wouldn't update correctly. 
+      for (let i = 1; i <= 5; i++ ) {
+        if (!currentValue[i-1]) {
+          document.getElementById(`row${attempt}_letter${i}`).innerHTML = "";
+        } else {
+          document.getElementById(`row${attempt}_letter${i}`).innerHTML = currentValue[i-1];
+        }
         console.log(currentValue[i-1], chosenWord[i-1]) 
       }
     }

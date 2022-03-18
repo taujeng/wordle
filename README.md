@@ -6,6 +6,11 @@ Plan on hosting my version on a custom domain.
 
 To Do:
 
-- backspace also applies to boxes, not just values
-- add animations for boxes upon submition
-- add functionality to header buttons
+- [x] backspace also applies to boxes, not just values
+- [ ] add animations for boxes upon submission
+- [ ] add functionality to header buttons
+- - [ ] hamburger
+- - [ ] question: wordle rules
+- - [ ] stats
+- - - [ ] local storage
+- - [ ] settings
