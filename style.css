@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Hubballi&display=swap');
+
 * {
   margin: 0;
+  font-family: 'Hubballi', cursive;
 }
 
 .header {
   width: 100%;
   height: 20%;
+  /* border-bottom: 1px solid black; */
 }
 
 .headerWrapper {
@@ -20,6 +24,95 @@
 }
 
 /* Header Buttons  */
+.topLeft {
+  position: relative;
+}
+
+/* Modals */
+.material-icons {
+  cursor: pointer;
+}
+
+.modal {
+  /* using fixed instead of absolute, bc we want the modal to follow
+  the user as user scrolls up and down */
+  position: fixed;
+  /* centering the modal */
+  /* first centers the top left of our modal */
+  top: 50%;
+  left: 50%;
+  /* now move the modal -50% in the x direction, -50% in y direction */
+  /* the 50% corresponds to size of container, as opposed to size of entire screen
+  which is what top and left were doing */
+  /* scale of 0 hides it */
+  width: 400px;
+  height: 450px;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid black;
+  border-radius: 10px;
+  z-index: 10;
+  background-color: white;
+  width: 500px;
+  max-width: 80%;
+}
+
+/* we are using scale instead of display: none 
+  so we can use transition */
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+.modal-header .title {
+  font-size: 1.25 rem;
+  font-weight: bold;
+}
+
+.close-modal {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #08ff00;
+}
+
+.modal-body {
+  padding: 10px 15px;
+}
+
+.overlay {
+  position: fixed;
+  /* by default, doesn't show up */
+  opacity: 0;
+  /* to make the modal fill the entire screen: */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* make it so you can click thru the overlay */
+  pointer-events: none;
+  transition: 200ms ease-in-out;
+}
+
+.overlay.active {
+  /* can now see the overlay, and can't click thru it */
+  opacity: 1;
+  pointer-events: all;
+}
+
 .pop {
   position: relative;
   cursor: pointer;
@@ -30,9 +123,10 @@
 }
 
 .pop-up {
+  font-family: 'Hubballi', cursive;
   visibility: hidden;
-  width: 250px;
-  height: 30px;
+  width: 400px;
+  height: 450px;
   color: black;
   background-color: #fff;
   text-align: center;
@@ -40,14 +134,15 @@
   padding: 8px 0;
   position: absolute;
   z-index: 2;
-  bottom: -250px;
+  bottom: -420px;
+  left: 700px;
 }
 
 /* Toggle this class - hide and show the popup */
 .pop-up.show {
-  visibility: visible;
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
+  visibility: visible;
 }
 
 /* Add animation (fade in the popup) */

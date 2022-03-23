@@ -1,30 +1,64 @@
-import list from "./list.js"
+import list from './list.js';
 
 const data = list;
 
-const chosenWord = data[Math.floor(Math.random()*data.length)].toLowerCase()
-console.log(chosenWord)
+const chosenWord = data[Math.floor(Math.random() * data.length)].toLowerCase();
+console.log(chosenWord);
 
 let attempt = 1;
 
+// Modals
 
+const openModalButtons = document.querySelectorAll('[data-modal-target]');
+const closeModalButtons = document.querySelectorAll('.close-modal');
+const overlay = document.querySelector('.overlay');
 
-let popup = document.getElementById("pop1");
-let popup2 = document.getElementById("the_pop")
-popup.addEventListener("click", function() {
-  popup2.classList.toggle("show");
-})
+openModalButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    // .datasets lets you access all "data" attributes as if they were js objects
+    // button.dataset.modalTarget targets: data-modal-target  so we end up with "#modal"
+    const modal = document.querySelector(button.dataset.modalTarget);
+    openModal(modal);
+  });
+});
 
+closeModalButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    // grab the closest parent element w the class of modal
+    // start at button, and start going upwards to the parents, checking if they have the modal class
+    // and if so, that's what is returned
+    const modal = button.closest('.modal');
+    closeModal(modal);
+  });
+});
 
+function openModal(modal) {
+  if (modal == null) return;
+  modal.classList.add('active');
+  overlay.classList.add('active');
+}
 
+function closeModal(modal) {
+  if (modal == null) return;
+  modal.classList.remove('active');
+  overlay.classList.remove('active');
+}
 
+// Close Modal when Clicking on Overlay:
+overlay.addEventListener('click', () => {
+  // find all open modals
+  const modals = document.querySelectorAll('.modal.active');
+  modals.forEach((modal) => {
+    closeModal(modal);
+  });
+});
 
 const Keyboard = {
   // keep track of classes: keyboard, keyboard__keys, the keys
   elements: {
     main: null, // main keyboard element
-    keysContainer: null, // 
-    keys: [] // arrays of the button for the keys
+    keysContainer: null, //
+    keys: [], // arrays of the button for the keys
   },
 
   // fired off when kb gets input, or when kb is closed
@@ -33,54 +67,74 @@ const Keyboard = {
   },
 
   properties: {
-    value: "", // current value of the kb
+    value: '', // current value of the kb
   },
 
   init() {
-
     // Create main elements
-    this.elements.main = document.createElement("div");
+    this.elements.main = document.createElement('div');
     // create a div, and store it virtually in js
-    this.elements.keysContainer = document.createElement("div");
+    this.elements.keysContainer = document.createElement('div');
 
     // Set up main elements: adding some classes
-    this.elements.main.classList.add("keyboard");
-    this.elements.keysContainer.classList.add("keyboard__keys");
+    this.elements.main.classList.add('keyboard');
+    this.elements.keysContainer.classList.add('keyboard__keys');
     // append the value of _createKeys() onto keysContainer
     this.elements.keysContainer.appendChild(this._createKeys());
 
     // Select all buttons with the class ".keyboard__keys" and store them as a nodelist/array in "keys"
-    this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key")
+    this.elements.keys =
+      this.elements.keysContainer.querySelectorAll('.keyboard__key');
 
     // Add to DOM
-    // Create that parent child relationship. keyboard -> keyboard__keys
     this.elements.main.appendChild(this.elements.keysContainer);
     document.body.appendChild(this.elements.main);
 
-    // Automatically use kb for elemetns with .use-keyboard-input
-    // for ea area with a class of .use, we'll loop thru
-    document.querySelectorAll(".use-keyboard-input").forEach(element => {
-      // on focus, we open up kb
-      element.addEventListener("focus", () => {
-        // initial value = value in text area/input
-        this.open(element.value, currentValue => {
+    document.querySelectorAll('.use-keyboard-input').forEach((element) => {
+      element.addEventListener('focus', () => {
+        this.open(element.value, (currentValue) => {
           // value of the text area is set to the value in the kb
-          element.value = currentValue
-        })
-      })
-    })
+          element.value = currentValue;
+        });
+      });
+    });
   },
 
   _createKeys() {
-    // will return a document fragment (virtual elements, that other elements can 
+    // will return a document fragment (virtual elements, that other elements can
     // append to. then append the whole fragment to a diff element
     // gonna create a fragment, then return it, and then append to keysContainer
     // this will append all the keys in this fragment to the keysContainer
     const fragment = document.createDocumentFragment();
     const keyLayout = [
-        "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
-        "a", "s", "d", "f", "g", "h", "j", "k", "l",
-        "done", "z", "x", "c", "v", "b", "n", "m", "backspace",
+      'q',
+      'w',
+      'e',
+      'r',
+      't',
+      'y',
+      'u',
+      'i',
+      'o',
+      'p',
+      'a',
+      's',
+      'd',
+      'f',
+      'g',
+      'h',
+      'j',
+      'k',
+      'l',
+      'done',
+      'z',
+      'x',
+      'c',
+      'v',
+      'b',
+      'n',
+      'm',
+      'backspace',
     ];
     // gonna loop thru keyLayout, and make a button out of ea one
 
@@ -89,65 +143,71 @@ const Keyboard = {
       return `<i class="material-icons">${icon_name}</i>`;
     };
 
-    keyLayout.forEach(key => {
-      const keyElement = document.createElement("button");
+    keyLayout.forEach((key) => {
+      const keyElement = document.createElement('button');
       // to make new rows in the kb:
       // if the key we're looping thru is the following, give true. otherwise false.
       // for indexOf, it returns -1 if it's NOT in the array.
       // so if true, we want to add a line break
-      const insertLineBreak = ["p", "l"].indexOf(key) !== -1;
-      
+      const insertLineBreak = ['p', 'l'].indexOf(key) !== -1;
+
       // Add attributes/ classes
       //  <button type="button" (adding this part)
-      keyElement.setAttribute("type", "button");
+      keyElement.setAttribute('type', 'button');
       // "keyboard__keys" is the main class all keys should have ( which is why we're
       // putting this in the loop)
-      keyElement.classList.add("keyboard__key");
+      keyElement.classList.add('keyboard__key');
 
       //  Give ea key its own ID
-      keyElement.setAttribute("id", key)
+      keyElement.setAttribute('id', key);
 
       // Figure out what key we're looping thru
-      
+
       switch (key) {
         // if the current key is backspace
-        case "backspace":
-          keyElement.classList.add("keyboard__key--wide");
-          keyElement.innerHTML = createIconHTML("backspace");
+        case 'backspace':
+          keyElement.classList.add('keyboard__key--wide');
+          keyElement.innerHTML = createIconHTML('backspace');
 
           // for the spacebar, we need to clear the current value
           // this.properties.value = our keyboard constant.properties.value =""
           // look at structure of const keyboard at the top
           // this removes the last character from the current value
-          keyElement.addEventListener("click", () => {
-            this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);            // we let the kb know that the input has changed. so we need to trigger an event
-            this._triggerEvent("oninput");
-          })  
-          
-          break;
-
-        case "done":
-          keyElement.classList.add("keyboard__key--wide", "keyboard__key--dark");
-          keyElement.innerHTML = createIconHTML("check_circle");
-
-          keyElement.addEventListener("click", () => {
-            this._checkWord()
-            this.properties.value = ""
-            attempt += 1
-          })  
+          keyElement.addEventListener('click', () => {
+            this.properties.value = this.properties.value.substring(
+              0,
+              this.properties.value.length - 1
+            ); // we let the kb know that the input has changed. so we need to trigger an event
+            this._triggerEvent('oninput');
+          });
 
           break;
 
-          // if none of these cases are true (aka not a special key)
-          default:
-            keyElement.textContent = key.toLowerCase();
+        case 'done':
+          keyElement.classList.add(
+            'keyboard__key--wide',
+            'keyboard__key--dark'
+          );
+          keyElement.innerHTML = createIconHTML('check_circle');
 
-            keyElement.addEventListener("click", () => {
-              this.properties.value += key.toLowerCase();
-              this._triggerEvent("oninput");
-            });
+          keyElement.addEventListener('click', () => {
+            this._checkWord();
+            this.properties.value = '';
+            attempt += 1;
+          });
 
-            break;
+          break;
+
+        // if none of these cases are true (aka not a special key)
+        default:
+          keyElement.textContent = key.toLowerCase();
+
+          keyElement.addEventListener('click', () => {
+            this.properties.value += key.toLowerCase();
+            this._triggerEvent('oninput');
+          });
+
+          break;
       }
 
       // the fragment is a lil container for all the keys.
@@ -155,9 +215,9 @@ const Keyboard = {
 
       // if we need to insert a linebreak
       if (insertLineBreak) {
-        fragment.appendChild(document.createElement("br"));
+        fragment.appendChild(document.createElement('br'));
       }
-    })
+    });
 
     // we've looked everything, created buttons(keys), and returned them as a document fragment
     return fragment;
@@ -166,7 +226,7 @@ const Keyboard = {
   // trigger eventHandler from above
   _triggerEvent(handlerName) {
     // if a fx is specified in one of the properties (oninput/onclose), do this
-    if (typeof this.eventHandlers[handlerName] == "function") {
+    if (typeof this.eventHandlers[handlerName] == 'function') {
       // provide the current value to the code that is using the kb
       this.eventHandlers[handlerName](this.properties.value);
     }
@@ -176,57 +236,63 @@ const Keyboard = {
   // can spawn with that word
   open(initialValue, oninput) {
     // if initial value is provided, use it. if not, reset to empty
-    this.properties.value = initialValue || "";
+    this.properties.value = initialValue || '';
     // can specify function for oninput/onclose if you want.
     this.eventHandlers.oninput = oninput;
   },
 
   _checkWord() {
-    let currentTry = this.properties.value.slice(0,5)
+    let currentTry = this.properties.value.slice(0, 5);
     for (let i = 1; i <= currentTry.length; i++) {
-      if (currentTry[i-1] === chosenWord[i-1]) {
-          document.getElementById(`row${attempt}_letter${i}`).classList.add("correct")
-          document.getElementById(currentTry[i-1]).classList.add("correct")
-        } else if (chosenWord.includes(currentTry[i-1])) {
-          document.getElementById(`row${attempt}_letter${i}`).classList.add("almost")
-          document.getElementById(currentTry[i-1]).classList.add("almost")
-        } else {
-          document.getElementById(`row${attempt}_letter${i}`).classList.add("wrong")
-          document.getElementById(currentTry[i-1]).classList.add("wrong")
-        }
+      if (currentTry[i - 1] === chosenWord[i - 1]) {
+        document
+          .getElementById(`row${attempt}_letter${i}`)
+          .classList.add('correct');
+        document.getElementById(currentTry[i - 1]).classList.add('correct');
+      } else if (chosenWord.includes(currentTry[i - 1])) {
+        document
+          .getElementById(`row${attempt}_letter${i}`)
+          .classList.add('almost');
+        document.getElementById(currentTry[i - 1]).classList.add('almost');
+      } else {
+        document
+          .getElementById(`row${attempt}_letter${i}`)
+          .classList.add('wrong');
+        document.getElementById(currentTry[i - 1]).classList.add('wrong');
+      }
     }
     if (currentTry === chosenWord) {
-      console.log("you win")
+      console.log('you win');
       if (attempt === 1) {
-        console.log("Cheater.")
+        console.log('Cheater.');
       }
     } else {
-      console.log("wrong")
+      console.log('wrong');
     }
-  }
+  },
 };
 
-  // once DOM(HTML structure) has been loaded on page, call init method.
-window.addEventListener("DOMContentLoaded", function () {
+// once DOM(HTML structure) has been loaded on page, call init method.
+window.addEventListener('DOMContentLoaded', function () {
   Keyboard.init();
   // example of how the system will be using the kb. thru the open method
-  Keyboard.open("", function(currentValue) {
+  Keyboard.open('', function (currentValue) {
     if (attempt > 6) {
-      console.log("Too many tries.")
+      console.log('Too many tries.');
     }
-    console.log("value changed! here it is: " + currentValue);
+    console.log('value changed! here it is: ' + currentValue);
     if (currentValue.length < 6 && attempt < 7) {
       // Loop runs 5 times no matter what. If I did currentValue.length instead of 5, backspace
-      // wouldn't update correctly. 
-      for (let i = 1; i <= 5; i++ ) {
-        if (!currentValue[i-1]) {
-          document.getElementById(`row${attempt}_letter${i}`).innerHTML = "";
+      // wouldn't update correctly.
+      for (let i = 1; i <= 5; i++) {
+        if (!currentValue[i - 1]) {
+          document.getElementById(`row${attempt}_letter${i}`).innerHTML = '';
         } else {
-          document.getElementById(`row${attempt}_letter${i}`).innerHTML = currentValue[i-1];
+          document.getElementById(`row${attempt}_letter${i}`).innerHTML =
+            currentValue[i - 1];
         }
-        console.log(currentValue[i-1], chosenWord[i-1]) 
+        console.log(currentValue[i - 1], chosenWord[i - 1]);
       }
     }
-
   });
 });

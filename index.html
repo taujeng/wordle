@@ -1,77 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <title>wordle wordle</title>
-</head>
-<body>
-  <div class="header">
-    <div class="headerWrapper">
-      <div class="topLeft">
-        <i class="material-icons">menu</i>
-        <i class="material-icons pop" id="pop1">help_outline
-          <span class="pop-up" id="the_pop">VIVIAN IS CUTE ❤️</span>
-        </i>
-      </div>
-      <div class="topMiddle">
-        <div class="title">wordle wordle</div>
-      </div>
-      <div class="topRight">
-        <i class="material-icons">bar_chart</i>
-        <i class="material-icons">settings</i>
-      </div>
-    </div>
-  </div>
-  <div class="bodyContainer">
-    <div class="rowContainer">
-      <div class="box" id="row1_letter1"></div>
-      <div class="box" id="row1_letter2"></div>
-      <div class="box" id="row1_letter3"></div>
-      <div class="box" id="row1_letter4"></div>
-      <div class="box" id="row1_letter5"></div>
-    </div>
-    <div class="rowContainer">
-      <div class="box" id="row2_letter1"></div>
-      <div class="box" id="row2_letter2"></div>
-      <div class="box" id="row2_letter3"></div>
-      <div class="box" id="row2_letter4"></div>
-      <div class="box" id="row2_letter5"></div>
-    </div>
-    <div class="rowContainer">
-      <div class="box" id="row3_letter1"></div>
-      <div class="box" id="row3_letter2"></div>
-      <div class="box" id="row3_letter3"></div>
-      <div class="box" id="row3_letter4"></div>
-      <div class="box" id="row3_letter5"></div>
-    </div>
-    <div class="rowContainer">
-      <div class="box" id="row4_letter1"></div>
-      <div class="box" id="row4_letter2"></div>
-      <div class="box" id="row4_letter3"></div>
-      <div class="box" id="row4_letter4"></div>
-      <div class="box" id="row4_letter5"></div>
-    </div>
-    <div class="rowContainer">
-      <div class="box" id="row5_letter1"></div>
-      <div class="box" id="row5_letter2"></div>
-      <div class="box" id="row5_letter3"></div>
-      <div class="box" id="row5_letter4"></div>
-      <div class="box" id="row5_letter5"></div>
-    </div>
-    <div class="rowContainer">
-      <div class="box" id="row6_letter1"></div>
-      <div class="box" id="row6_letter2"></div>
-      <div class="box" id="row6_letter3"></div>
-      <div class="box" id="row6_letter4"></div>
-      <div class="box" id="row6_letter5"></div>
-    </div>
-  </div> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>wordless</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="headerWrapper">
+        <div class="topLeft">
+          <i class="material-icons">menu</i>
+          <i class="material-icons" data-modal-target="#modal">help_outline</i>
+          <div class="modal" id="modal">
+            <div class="modal-header">
+              <div class="title">Lorem Ipsum</div>
+            </div>
+            <div class="modal-body">
+              Iorem ipsum dolor sit amet, consectetur Ldipisicing elit.
+              Dignissimos impedit Iraesentium voluptas obcaecati quis modi
+              Katione quos atque odio dolor voluptatum Eaiores, recusandae
+              asperiores accusamus Yinima id in pariatur quasi numquam
+              Oxercitationem? Maxime nemo earum saepe Uisi soluta excepturi
+              totam porro ea, error Voloribus, nihil tempore commodi explicabo,
+              Ieritatis harum architecto fuga! Voluptatibus Velectus, incidunt
+              quae laudantium similique Iicta distinctio neque voluptate
+              excepturi, Aumque blanditiis est recusandae quis Numquam amet qui,
+              suscipit voluptatum.
+            </div>
+            <button class="close-modal">&times;</button>
+          </div>
+          <div class="overlay"></div>
+        </div>
 
+        <div class="topMiddle">
+          <div class="title">wordless</div>
+        </div>
+        <div class="topRight">
+          <i class="material-icons">bar_chart</i>
+          <i class="material-icons">settings</i>
+        </div>
+      </div>
+    </div>
+    <div class="bodyContainer">
+      <div class="rowContainer">
+        <div class="box" id="row1_letter1"></div>
+        <div class="box" id="row1_letter2"></div>
+        <div class="box" id="row1_letter3"></div>
+        <div class="box" id="row1_letter4"></div>
+        <div class="box" id="row1_letter5"></div>
+      </div>
+      <div class="rowContainer">
+        <div class="box" id="row2_letter1"></div>
+        <div class="box" id="row2_letter2"></div>
+        <div class="box" id="row2_letter3"></div>
+        <div class="box" id="row2_letter4"></div>
+        <div class="box" id="row2_letter5"></div>
+      </div>
+      <div class="rowContainer">
+        <div class="box" id="row3_letter1"></div>
+        <div class="box" id="row3_letter2"></div>
+        <div class="box" id="row3_letter3"></div>
+        <div class="box" id="row3_letter4"></div>
+        <div class="box" id="row3_letter5"></div>
+      </div>
+      <div class="rowContainer">
+        <div class="box" id="row4_letter1"></div>
+        <div class="box" id="row4_letter2"></div>
+        <div class="box" id="row4_letter3"></div>
+        <div class="box" id="row4_letter4"></div>
+        <div class="box" id="row4_letter5"></div>
+      </div>
+      <div class="rowContainer">
+        <div class="box" id="row5_letter1"></div>
+        <div class="box" id="row5_letter2"></div>
+        <div class="box" id="row5_letter3"></div>
+        <div class="box" id="row5_letter4"></div>
+        <div class="box" id="row5_letter5"></div>
+      </div>
+      <div class="rowContainer">
+        <div class="box" id="row6_letter1"></div>
+        <div class="box" id="row6_letter2"></div>
+        <div class="box" id="row6_letter3"></div>
+        <div class="box" id="row6_letter4"></div>
+        <div class="box" id="row6_letter5"></div>
+      </div>
+    </div>
 
-  <script type="module" src="./keyboard.js"></script>
-</body>
+    <script type="module" src="./keyboard.js"></script>
+  </body>
 </html>
