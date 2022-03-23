@@ -70,6 +70,8 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid black;
+  text-align: center;
+  display: block;
 }
 
 .modal-header .title {
@@ -207,7 +209,7 @@
 }
 
 .box.wrong {
-  background-color: darkslategrey;
+  background-color: black;
 }
 
 /* Keyboard CSS */
@@ -291,7 +293,7 @@
 }
 
 .keyboard__key.wrong {
-  background-color: darkslategrey;
+  background-color: black;
 }
 
 .keyboard__key:active {

@@ -5,7 +5,7 @@ const data = list;
 const chosenWord = data[Math.floor(Math.random() * data.length)].toLowerCase();
 console.log(chosenWord);
 
-let attempt = 1;
+let attempts = 1;
 
 // Modals
 
@@ -18,7 +18,8 @@ openModalButtons.forEach((button) => {
     // .datasets lets you access all "data" attributes as if they were js objects
     // button.dataset.modalTarget targets: data-modal-target  so we end up with "#modal"
     const modal = document.querySelector(button.dataset.modalTarget);
-    openModal(modal);
+    modal.classList.add('active');
+    overlay.classList.add('active');
   });
 });
 
@@ -28,30 +29,59 @@ closeModalButtons.forEach((button) => {
     // start at button, and start going upwards to the parents, checking if they have the modal class
     // and if so, that's what is returned
     const modal = button.closest('.modal');
-    closeModal(modal);
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
   });
 });
 
-function openModal(modal) {
-  if (modal == null) return;
-  modal.classList.add('active');
-  overlay.classList.add('active');
-}
+// function openModal(modal) {
+//   if (modal == null) return;
+//   modal.classList.add('active');
+//   overlay.classList.add('active');
+// }
 
-function closeModal(modal) {
-  if (modal == null) return;
-  modal.classList.remove('active');
-  overlay.classList.remove('active');
-}
+// function closeModal(modal) {
+//   if (modal == null) return;
+//   modal.classList.remove('active');
+//   overlay.classList.remove('active');
+// }
 
 // Close Modal when Clicking on Overlay:
 overlay.addEventListener('click', () => {
   // find all open modals
   const modals = document.querySelectorAll('.modal.active');
   modals.forEach((modal) => {
-    closeModal(modal);
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
   });
 });
+
+// Keeping track of Stats in Local Storage
+
+function statTrack(winner, attempt, loss = 0) {
+  // brand new stats
+  if (!localStorage.getItem('wordless')) {
+    localStorage.setItem(
+      'wordless',
+      JSON.stringify({
+        try: 0,
+        win: 0,
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+        6: 0,
+      })
+    );
+  }
+  let newData = JSON.parse(localStorage.getItem('wordless'));
+  newData.win += winner;
+  newData.try += attempt;
+  newData[`${attempts}`] += 1 + loss;
+
+  localStorage.setItem('wordless', JSON.stringify(newData));
+}
 
 const Keyboard = {
   // keep track of classes: keyboard, keyboard__keys, the keys
@@ -193,7 +223,7 @@ const Keyboard = {
           keyElement.addEventListener('click', () => {
             this._checkWord();
             this.properties.value = '';
-            attempt += 1;
+            attempts += 1;
           });
 
           break;
@@ -246,26 +276,30 @@ const Keyboard = {
     for (let i = 1; i <= currentTry.length; i++) {
       if (currentTry[i - 1] === chosenWord[i - 1]) {
         document
-          .getElementById(`row${attempt}_letter${i}`)
+          .getElementById(`row${attempts}_letter${i}`)
           .classList.add('correct');
         document.getElementById(currentTry[i - 1]).classList.add('correct');
       } else if (chosenWord.includes(currentTry[i - 1])) {
         document
-          .getElementById(`row${attempt}_letter${i}`)
+          .getElementById(`row${attempts}_letter${i}`)
           .classList.add('almost');
         document.getElementById(currentTry[i - 1]).classList.add('almost');
       } else {
         document
-          .getElementById(`row${attempt}_letter${i}`)
+          .getElementById(`row${attempts}_letter${i}`)
           .classList.add('wrong');
         document.getElementById(currentTry[i - 1]).classList.add('wrong');
       }
     }
     if (currentTry === chosenWord) {
       console.log('you win');
-      if (attempt === 1) {
+      statTrack(1, 1);
+
+      if (attempts === 1) {
         console.log('Cheater.');
       }
+    } else if (attempts === 6 && currentTry != chosenWord) {
+      statTrack(0, 1, -1);
     } else {
       console.log('wrong');
     }
@@ -277,18 +311,18 @@ window.addEventListener('DOMContentLoaded', function () {
   Keyboard.init();
   // example of how the system will be using the kb. thru the open method
   Keyboard.open('', function (currentValue) {
-    if (attempt > 6) {
+    if (attempts > 6) {
       console.log('Too many tries.');
     }
     console.log('value changed! here it is: ' + currentValue);
-    if (currentValue.length < 6 && attempt < 7) {
+    if (currentValue.length < 6 && attempts < 7) {
       // Loop runs 5 times no matter what. If I did currentValue.length instead of 5, backspace
       // wouldn't update correctly.
       for (let i = 1; i <= 5; i++) {
         if (!currentValue[i - 1]) {
-          document.getElementById(`row${attempt}_letter${i}`).innerHTML = '';
+          document.getElementById(`row${attempts}_letter${i}`).innerHTML = '';
         } else {
-          document.getElementById(`row${attempt}_letter${i}`).innerHTML =
+          document.getElementById(`row${attempts}_letter${i}`).innerHTML =
             currentValue[i - 1];
         }
         console.log(currentValue[i - 1], chosenWord[i - 1]);
