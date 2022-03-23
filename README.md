@@ -10,10 +10,10 @@ To Do:
 - [ ] prevent zoom in on mobile
 - [ ] add animations for boxes upon submission
 - [ ] add functionality to header buttons
-- - [ ] X button to close pop up
+- - [x] X button to close pop up
 - - [ ] hamburger
 - - [ ] question: wordle rules
 - - [ ] stats
-- - - [ ] local storage
+- - - [x] local storage
 - - [ ] settings
 - [ ] check if submissions are actual words
