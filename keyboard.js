@@ -69,11 +69,6 @@ function statTrack(winner, attempt, loss = 0, fail = false) {
   newData.win += winner;
   // If lose game, reset streak. Otherwise, + 1
   fail ? (newData.streak = 0) : (newData.streak += winner);
-  // if (fail) {
-  //   newData.streak = 0;
-  // } else {
-  //   newData.streak += winner;
-  // }
 
   if (newData.streak > newData.max) {
     newData.max = newData.streak;
@@ -130,14 +125,13 @@ function statTrack(winner, attempt, loss = 0, fail = false) {
 statTrack(0, 0, -1);
 
 const Keyboard = {
-  // keep track of classes: keyboard, keyboard__keys, the keys
   elements: {
     main: null, // main keyboard element
     keysContainer: null, //
     keys: [], // arrays of the button for the keys
   },
 
-  // fired off when kb gets input, or when kb is closed
+  // fired off when kb gets input
   eventHandlers: {
     oninput: null,
   },
