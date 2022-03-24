@@ -34,18 +34,6 @@ closeModalButtons.forEach((button) => {
   });
 });
 
-// function openModal(modal) {
-//   if (modal == null) return;
-//   modal.classList.add('active');
-//   overlay.classList.add('active');
-// }
-
-// function closeModal(modal) {
-//   if (modal == null) return;
-//   modal.classList.remove('active');
-//   overlay.classList.remove('active');
-// }
-
 // Close Modal when Clicking on Overlay:
 overlay.addEventListener('click', () => {
   // find all open modals
@@ -58,7 +46,7 @@ overlay.addEventListener('click', () => {
 
 // Keeping track of Stats in Local Storage
 
-function statTrack(winner, attempt, loss = 0) {
+function statTrack(winner, attempt, loss = 0, fail = false) {
   // brand new stats
   if (!localStorage.getItem('wordless')) {
     localStorage.setItem(
@@ -66,6 +54,8 @@ function statTrack(winner, attempt, loss = 0) {
       JSON.stringify({
         try: 0,
         win: 0,
+        streak: 0,
+        max: 0,
         1: 0,
         2: 0,
         3: 0,
@@ -77,11 +67,67 @@ function statTrack(winner, attempt, loss = 0) {
   }
   let newData = JSON.parse(localStorage.getItem('wordless'));
   newData.win += winner;
+  // If lose game, reset streak. Otherwise, + 1
+  fail ? (newData.streak = 0) : (newData.streak += winner);
+  // if (fail) {
+  //   newData.streak = 0;
+  // } else {
+  //   newData.streak += winner;
+  // }
+
+  if (newData.streak > newData.max) {
+    newData.max = newData.streak;
+  }
   newData.try += attempt;
   newData[`${attempts}`] += 1 + loss;
 
   localStorage.setItem('wordless', JSON.stringify(newData));
+
+  //  Updating new Stats
+  const topStat = document.getElementById('topStat');
+  const playCount = document.getElementById('stats-play');
+  const winStat = document.getElementById('stats-win');
+  const currentStreak = document.getElementById('stats-currentStreak');
+  const maxStreak = document.getElementById('stats-maxStreak');
+
+  if (newData.try > 0) {
+    topStat.innerHTML = (
+      (newData[1] * 1 +
+        newData[2] * 2 +
+        newData[3] * 3 +
+        newData[4] * 4 +
+        newData[5] * 5 +
+        newData[6] * 6) /
+      newData.win
+    ).toFixed(2);
+    winStat.innerHTML = `${((newData.win / newData.try) * 100).toFixed(2)}%`;
+  }
+
+  playCount.innerHTML = newData.try;
+  currentStreak.innerHTML = newData.streak;
+  maxStreak.innerHTML = newData.max;
+
+  document.getElementById(
+    'stats-1attempt'
+  ).innerHTML = `1 attempts: ${newData[1]}`;
+  document.getElementById(
+    'stats-2attempt'
+  ).innerHTML = `2 attempts: ${newData[2]}`;
+  document.getElementById(
+    'stats-3attempt'
+  ).innerHTML = `3 attempts: ${newData[3]}`;
+  document.getElementById(
+    'stats-4attempt'
+  ).innerHTML = `4 attempts: ${newData[4]}`;
+  document.getElementById(
+    'stats-5attempt'
+  ).innerHTML = `5 attempts: ${newData[5]}`;
+  document.getElementById(
+    'stats-6attempt'
+  ).innerHTML = `6 attempts: ${newData[6]}`;
 }
+
+statTrack(0, 0, -1);
 
 const Keyboard = {
   // keep track of classes: keyboard, keyboard__keys, the keys
@@ -298,8 +344,9 @@ const Keyboard = {
       if (attempts === 1) {
         console.log('Cheater.');
       }
+      // Upon failure/Lose Game
     } else if (attempts === 6 && currentTry != chosenWord) {
-      statTrack(0, 1, -1);
+      statTrack(0, 1, -1, true);
     } else {
       console.log('wrong');
     }
@@ -314,7 +361,7 @@ window.addEventListener('DOMContentLoaded', function () {
     if (attempts > 6) {
       console.log('Too many tries.');
     }
-    console.log('value changed! here it is: ' + currentValue);
+    // console.log('value changed! here it is: ' + currentValue);
     if (currentValue.length < 6 && attempts < 7) {
       // Loop runs 5 times no matter what. If I did currentValue.length instead of 5, backspace
       // wouldn't update correctly.
@@ -325,7 +372,7 @@ window.addEventListener('DOMContentLoaded', function () {
           document.getElementById(`row${attempts}_letter${i}`).innerHTML =
             currentValue[i - 1];
         }
-        console.log(currentValue[i - 1], chosenWord[i - 1]);
+        // console.log(currentValue[i - 1], chosenWord[i - 1]);
       }
     }
   });

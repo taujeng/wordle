@@ -18,7 +18,7 @@
           <i class="material-icons" data-modal-target="#modal-1">menu</i>
           <div class="modal" id="modal-1">
             <div class="modal-header">
-              <div class="title">Lorem Ipsum?</div>
+              <div class="modal-title">Lorem Ipsum?</div>
             </div>
             <div class="modal-body">
               Iorem ipsum dolor sit amet, consectetur Ldipisicing elit.
@@ -40,10 +40,10 @@
           >
           <div class="modal" id="modal-2">
             <div class="modal-header">
-              <div class="title">rules</div>
+              <div class="modal-title">rules</div>
             </div>
             <div class="modal-body">
-              <h2>You have six tries to figure out the word.</h2>
+              <h2>You have six tries to figure out your word.</h2>
               <h2>Each guess should be a valid word.</h2>
               <h2>
                 After each guess, the color of the tiles will change
@@ -59,7 +59,46 @@
           <div class="title">wordless</div>
         </div>
         <div class="topRight">
-          <i class="material-icons">bar_chart</i>
+          <i class="material-icons" data-modal-target="#modal-3">bar_chart</i>
+          <div class="modal" id="modal-3">
+            <div class="modal-header">
+              <div class="modal-title">stats</div>
+            </div>
+            <div class="modal-body">
+              <div class="stats-top">
+                <div id="topStat" class="stats-number">0</div>
+                <p>Your current average</p>
+              </div>
+              <div class="stats-overview">
+                <div class="stats-play">
+                  <div id="stats-play" class="stats-number">0</div>
+                  <p>Played</p>
+                </div>
+                <div class="stats-win">
+                  <div id="stats-win" class="stats-number">0%</div>
+                  <p>Win %</p>
+                </div>
+                <div class="stats-currentStreak">
+                  <div id="stats-currentStreak" class="stats-number">0</div>
+                  <p>Current Streak</p>
+                </div>
+                <div class="stats-maxStreak">
+                  <div id="stats-maxStreak" class="stats-number">0</div>
+                  <p>Max Streak</p>
+                </div>
+              </div>
+              <div class="stats-distribution">
+                <div class="stats-guess" id="stats-1attempt">1 attempt: 0</div>
+                <div class="stats-guess" id="stats-2attempt">2 attempts: 0</div>
+                <div class="stats-guess" id="stats-3attempt">3 attempts: 0</div>
+                <div class="stats-guess" id="stats-4attempt">4 attempts: 0</div>
+                <div class="stats-guess" id="stats-5attempt">5 attempts: 0</div>
+                <div class="stats-guess" id="stats-6attempt">6 attempts: 0</div>
+              </div>
+            </div>
+            <button class="close-modal">&times;</button>
+          </div>
+
           <i class="material-icons">settings</i>
         </div>
       </div>

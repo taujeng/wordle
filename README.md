@@ -13,7 +13,8 @@ To Do:
 - - [x] X button to close pop up
 - - [ ] hamburger
 - - [ ] question: wordle rules
-- - [ ] stats
+- - [x] stats
 - - - [x] local storage
 - - [ ] settings
 - [ ] check if submissions are actual words
+- [ ] after winning, no more kb submission allowed.
