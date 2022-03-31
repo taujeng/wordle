@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Hubballi&display=swap');
 
+:root {
+  touch-action: none;
+  height: 100%;
+}
+
 * {
   margin: 0;
   font-family: 'Hubballi', cursive;
@@ -50,7 +55,7 @@
   which is what top and left were doing */
   /* scale of 0 hides it */
   width: 400px;
-  height: 500px;
+  height: 600px;
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
   border: 1px solid black;
@@ -58,7 +63,7 @@
   z-index: 10;
   background-color: #fbfbfd;
   max-width: 85%;
-  max-height: 75%;
+  max-height: 90%;
 }
 
 /* we are using scale instead of display: none 
@@ -124,6 +129,15 @@
   /* can now see the overlay, and can't click thru it */
   opacity: 1;
   pointer-events: all;
+}
+
+/* Modal Rules */
+.bot {
+  padding-bottom: 5px;
+}
+
+.both {
+  padding: 5px 0;
 }
 
 /* Modal Stats */

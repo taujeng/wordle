@@ -43,12 +43,47 @@
               <div class="modal-title">rules</div>
             </div>
             <div class="modal-body">
-              <h2>You have six tries to figure out your word.</h2>
-              <h2>Each guess should be a valid word.</h2>
-              <h2>
-                After each guess, the color of the tiles will change
-                accordingly.
-              </h2>
+              <p>Guess the word in 6 tries!</p>
+              <p>Each guess should be a valid word.</p>
+              <p class="bot">What do the colors mean?</p>
+              <div class="rowContainer">
+                <div class="box wrong">v</div>
+                <div class="box wrong">i</div>
+                <div class="box wrong">v</div>
+                <div class="box wrong">i</div>
+                <div class="box wrong">d</div>
+              </div>
+              <p class="both">Black: none of these letters are in the word.</p>
+              <div class="rowContainer">
+                <div class="box wrong">c</div>
+                <div class="box almost">r</div>
+                <div class="box almost">a</div>
+                <div class="box wrong">n</div>
+                <div class="box almost">e</div>
+              </div>
+              <p class="both">
+                Yellow: <b>r</b>,<b>a</b>, and <b>e</b> are in the word, but in
+                the wrong position.
+              </p>
+              <div class="rowContainer">
+                <div class="box correct">f</div>
+                <div class="box correct">a</div>
+                <div class="box wrong">i</div>
+                <div class="box wrong">n</div>
+                <div class="box wrong">t</div>
+              </div>
+              <p class="both">
+                Green: <b>f</b> and <b>a</b> are in the word, and the right
+                spot.
+              </p>
+              <div class="rowContainer">
+                <div class="box correct">f</div>
+                <div class="box correct">a</div>
+                <div class="box correct">e</div>
+                <div class="box correct">r</div>
+                <div class="box correct">y</div>
+              </div>
+              <p class="both">faery is correct!</p>
             </div>
             <button class="close-modal">&times;</button>
           </div>
