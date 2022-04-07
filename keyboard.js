@@ -339,14 +339,43 @@ const Keyboard = {
       console.log('you win');
       statTrack(1, 1);
 
-      if (attempts === 1) {
-        console.log('Cheater.');
-      }
+      this._resultMessage(attempts);
+
       // Upon failure/Lose Game
     } else if (attempts === 6 && currentTry != chosenWord) {
       statTrack(0, 1, -1, true);
     } else {
       console.log('wrong');
+    }
+  },
+  _resultMessage(tries) {
+    const try1 = ['Cheater', "You're Hacking."];
+    const try2 = ['Marvelous', 'Holy Moly~'];
+    const try3 = ['Very Impressive', 'Hat Trick 🎩'];
+    const try4 = ['Skillful', 'Nicely Done'];
+    const try5 = ['acceptable', 'good'];
+    const try6 = ['still alive...', 'that was close!'];
+    const resultMessage = document.getElementById('result-popup');
+    resultMessage.classList.add('appear');
+    switch (tries) {
+      case 1:
+        resultMessage.innerHTML = try1[Math.floor(Math.random() * try1.length)];
+        break;
+      case 2:
+        resultMessage.innerHTML = try2[Math.floor(Math.random() * try2.length)];
+        break;
+      case 3:
+        resultMessage.innerHTML = try3[Math.floor(Math.random() * try3.length)];
+        break;
+      case 4:
+        resultMessage.innerHTML = try4[Math.floor(Math.random() * try4.length)];
+        break;
+      case 5:
+        resultMessage.innerHTML = try5[Math.floor(Math.random() * try5.length)];
+        break;
+      case 6:
+        resultMessage.innerHTML = try6[Math.floor(Math.random() * try6.length)];
+        break;
     }
   },
 };
