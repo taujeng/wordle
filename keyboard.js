@@ -261,9 +261,13 @@ const Keyboard = {
           keyElement.innerHTML = createIconHTML('check_circle');
 
           keyElement.addEventListener('click', () => {
-            this._checkWord();
-            this.properties.value = '';
-            attempts += 1;
+            if (this.properties.value.length < 5) {
+              console.log('Invalid guess.');
+            } else {
+              this._checkWord();
+              this.properties.value = '';
+              attempts += 1;
+            }
           });
 
           break;

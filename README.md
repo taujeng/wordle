@@ -12,7 +12,7 @@ To Do:
 - [ ] add functionality to header buttons
 - - [x] X button to close pop up
 - - [ ] hamburger
-- - [ ] question: wordle rules
+- - [x] question: wordle rules
 - - [x] stats
 - - - [x] local storage
 - - [ ] settings

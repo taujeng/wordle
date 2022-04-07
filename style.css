@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Hubballi&display=swap');
 
 :root {
-  touch-action: none;
+  /* prevents ALL extra user interactions
+  touch-action: none; */
   height: 100%;
 }
 
@@ -218,6 +219,7 @@
 /* Keyboard CSS */
 
 .container {
+  touch-action: manipulation;
   margin: 0;
   width: 100%;
   height: 300px;
